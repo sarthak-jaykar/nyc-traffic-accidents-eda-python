@@ -1,0 +1,2 @@
+period_a,days_a,mean_per_day_a,period_b,days_b,mean_per_day_b,mann_whitney_u,p_value,change_pct
+Jan-Feb 2020,60,466.2,Apr-Jun 2020,91,196.5,5454.0,3.91e-25,-57.9
