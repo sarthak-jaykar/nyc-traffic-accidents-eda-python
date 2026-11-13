@@ -1,0 +1,43 @@
+HOW TO RUN: NYC Traffic Accidents 2020 — When and Where Collisions Hurt People
+Tools: Python 3.10 or later, VS Code (Windows). Time: about 20 to 30 minutes.
+
+1. SET UP PYTHON
+   Open the project folder in VS Code. Open a terminal (Ctrl+`) and run:
+      python -m venv .venv
+      .venv\Scripts\activate
+      pip install -r requirements.txt
+   The .venv folder is created on your own machine. Do not add it to the repository.
+
+2. DATA FILE (place in the data/ folder of this project)
+The original dataset is included in `data/nyc_accidents_2020.csv`. No separate download is required for this repository copy. The pipeline reads the source file from `data/`.
+
+   Original file name            Name to use                 Expected rows
+   NYC Accidents 2020.csv        nyc_accidents_2020.csv      74,881
+
+3. RUN THE PIPELINE
+   python script\run_all.py
+
+The run takes under a minute. It runs five steps in order:
+   01_ingest.py    profiles the raw file and prints the profile to the console
+   02_clean.py     cleans and flags issues, and prints the cleaning checks to the console
+   03_features.py  adds time bands and injury and fatality flags
+   04_analysis.py  writes the answers to Q1 to Q6 into results\
+   05_charts.py    writes the charts into screenshots\
+
+The cleaned intermediate file is written to your system temp folder, not to the project. This keeps data\ for the source file only.
+
+4. CHECK THE CONSOLE OUTPUT
+Compare with these values:
+   - Rows: 74,881
+   - Coordinates missing in source: 5,946. Coordinates equal to 0 (set to missing): 63
+   - Borough not recorded: 25,741
+   - Primary factor Unspecified: 19,471
+   - Casualty consistency failures: 0
+   - Collision IDs unique: True
+
+Then compare results\q1_monthly.csv: January 14,287 collisions; April 4,116.
+
+5. COMMON PROBLEMS
+- "No module named pandas": the virtual environment is not active. Run .venv\Scripts\activate first.
+- "File not found: nyc_accidents_2020.csv": the file is not in data\ or is named differently.
+- Charts not updating: delete the old PNG files in screenshots\ and run again.
